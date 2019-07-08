@@ -50,11 +50,11 @@ function sendToDiscord(message) {
   // Finally, make the post request to the Discord Incoming Webhook
   request(options, function(err, res, body) {
     if (err) {
-      console.log(`Line 53\n${__dirname}`)
       return console.error(err);
     }
     /* A successful POST to Discord's webhook responds with a 204 NO CONTENT */
     if (res.statusCode !== 204) {
+      console.log(`Line 57\n${__dirname}`)
       console.error("Error occured during the request to the Discord webhook");
     }
   });
