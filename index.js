@@ -174,6 +174,7 @@ function createMessage(data, eventName, block, altDescription) {
       description: stripAnsi(splitLog),
       timestamp: Math.floor(Date.now() / 1000),
     });
+    console.log(splitLog.length)
   }
 }
 
