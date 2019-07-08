@@ -69,21 +69,7 @@ function bufferMessage() {
 
   nextMessage.buffer = [nextMessage.description];
 
-  // continue shifting elements off the queue while they are the same event and 
-  // timestamp so they can be buffered together into a single request
-  while (messages.length && 
-    (messages[0].timestamp >= nextMessage.timestamp && 
-      messages[0].timestamp < (nextMessage.timestamp + conf.buffer_seconds)) && 
-    messages[0].event === nextMessage.event) {
-
-    // append description to our buffer and shift the message off the queue and discard it
-    nextMessage.buffer.push(messages[0].description);
-    messages.shift();
-  }
-
-  // join the buffer with newlines
-  nextMessage.description = nextMessage.buffer.join("\n");
-
+  
   // delete the buffer from memory
   delete nextMessage.buffer;
 
