@@ -133,9 +133,7 @@ function createMessage(data, eventName, altDescription) {
   }
 
   var msg = altDescription || data.data;
-  if (typeof msg === "object") {
-    msg = JSON.stringify(msg);
-  } 
+  if (typeof msg === "object") return
 
   messages.push({
     name: data.process.name,
