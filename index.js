@@ -133,7 +133,7 @@ function createMessage(data, eventName, block, altDescription) {
   }
 
   var msg = altDescription || data.data;
-  if (typeof msg === "object") return
+  if (typeof msg === "object" || msg == undefined) return
   if (block) msg = `\`\`\`ps\n${msg}\n\`\`\``
 
   messages.push({
