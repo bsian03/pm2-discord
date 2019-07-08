@@ -164,7 +164,7 @@ function createMessage(data, eventName, block, altDescription) {
   }
   
   const splitter = split(msg,1975)
-  for(const splitLog of splitter){
+  for(let splitLog of splitter){
     if (block) splitLog = `\`\`\`ps\n${splitLog}\n\`\`\``
     messages.push({
       name: data.process.name,
