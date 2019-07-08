@@ -28,7 +28,6 @@ var suppressed = {
 function sendToDiscord(message) {
 
   var description = message.description;
-  if(description.startsWith('{"message":"')) return
 
   // If a Discord URL is not set, we do not want to continue and nofify the user that it needs to be set
   if (!conf.discord_url) {
@@ -37,7 +36,7 @@ function sendToDiscord(message) {
 
   // The JSON payload to send to the Webhook
   var payload = {
-    "content" : `\`\`\`ps\n${description}\n\`\`\``
+    "content" : description
   };
 
   // Options for the post request
@@ -122,7 +121,7 @@ function processQueue() {
   }, 10000);
 }
 
-function createMessage(data, eventName, altDescription) {
+function createMessage(data, eventName, block, altDescription) {
   // we don't want to output pm2-discord's logs
   if (data.process.name === 'pm2-discord') {
     return;
@@ -135,6 +134,7 @@ function createMessage(data, eventName, altDescription) {
 
   var msg = altDescription || data.data;
   if (typeof msg === "object") return
+  if (block) msg = `\`\`\`ps\n${msg}\n\`\`\``
 
   messages.push({
     name: data.process.name,
@@ -150,14 +150,14 @@ pm2.launchBus(function(err, bus) {
     // Listen for process logs
     if (conf.log) {
       bus.on('log:out', function(data) {
-        createMessage(data, 'log');
+        createMessage(data, 'log', true);
       });
     }
 
     // Listen for process errors
     if (conf.error) {
       bus.on('log:err', function(data) {
-        createMessage(data, 'error');
+        createMessage(data, 'error', true);
       });
     }
 
