@@ -184,7 +184,7 @@ pm2.launchBus(function(err, bus) {
     bus.on('process:event', function(data) {
       if (!conf[data.event]) { return; }
       var msg = 'The following event has occured on the PM2 process ' + data.process.name + ': ' + data.event;
-      createMessage(data, data.event, msg);
+      createMessage(data, data.event, false, msg);
     });
 
     // Start the message processing
