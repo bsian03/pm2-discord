@@ -8,9 +8,6 @@ var stripAnsi = require('strip-ansi');
 var conf = pmx.initModule();
 
 // initialize buffer and queue_max opts
-// buffer seconds can be between 1 and 5
-conf.buffer_seconds = (conf.buffer_seconds > 0 && conf.buffer_seconds < 5) ? conf.buffer_seconds : 1;
-
 // queue max can be between 10 and 100
 conf.queue_max = (conf.queue_max > 10 && conf.queue_max <= 100) ? conf.queue_max : 100;
 
