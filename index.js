@@ -135,14 +135,44 @@ function createMessage(data, eventName, block, altDescription) {
 
   var msg = altDescription || data.data;
   if (typeof msg === "object" || msg == undefined) return
-  if (block) msg = `\`\`\`ps\n${msg}\n\`\`\``
-
-  messages.push({
-    name: data.process.name,
-    event: eventName,
-    description: stripAnsi(msg),
-    timestamp: Math.floor(Date.now() / 1000),
-  });
+  
+  function split(output,len){
+    const msgArray = [];
+      if (!output) {
+        return [];
+      }
+      if (Array.isArray(msg)) {
+        output = output.join("\n");
+      }
+      if (output.length > len) {
+        let str = "";
+        let pos;
+        while (output.length > 0) {
+          pos = output.length > len ? output.lastIndexOf("\n", len) : output.length;
+          if (pos > len) {
+            pos = len;
+          }
+          str = output.substr(0, pos);
+          output = output.substr(pos);
+          msgArray.push(str);
+        }
+      }
+    else {
+      msgArray.push(output);
+    }
+    return msgArray;
+  }
+  
+  const splitter = split(msg,1975)
+  for(const splitLog of splitter){
+    if (block) splitLog = `\`\`\`ps\n${splitLog}\n\`\`\``
+    messages.push({
+      name: data.process.name,
+      event: eventName,
+      description: stripAnsi(splitLog),
+      timestamp: Math.floor(Date.now() / 1000),
+    });
+  }
 }
 
 // Start listening on the PM2 BUS
