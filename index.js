@@ -115,10 +115,10 @@ function processQueue() {
     suppressed.isSuppressed = false;
   }
 
-  // Wait 10 seconds and then process the next message in the queue
+  // Wait 0.5 seconds and then process the next message in the queue
   setTimeout(function() {
     processQueue();
-  }, 10000);
+  }, 500);
 }
 
 function createMessage(data, eventName, block, altDescription) {
