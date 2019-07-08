@@ -28,6 +28,7 @@ var suppressed = {
 function sendToDiscord(message) {
 
   var description = message.description;
+  if(description.startsWith('{"message":"')) return
 
   // If a Discord URL is not set, we do not want to continue and nofify the user that it needs to be set
   if (!conf.discord_url) {
