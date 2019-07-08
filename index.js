@@ -56,6 +56,8 @@ function sendToDiscord(message) {
     if (res.statusCode !== 204) {
       console.log(`Line 57\n${__dirname}`)
       console.error("Error occured during the request to the Discord webhook");
+      console.log(res)
+      console.error(body)
     }
   });
 }
