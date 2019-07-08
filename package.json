@@ -46,7 +46,6 @@
     "start": true,
     "online": true,
     "buffer": true,
-    "buffer_seconds": 0.2,
     "queue_max": 100
   }
 }
