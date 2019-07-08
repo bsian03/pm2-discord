@@ -28,6 +28,7 @@ var suppressed = {
 function sendToDiscord(message) {
 
   var description = message.description;
+  console.log(description.length)
 
   // If a Discord URL is not set, we do not want to continue and nofify the user that it needs to be set
   if (!conf.discord_url) {
@@ -54,9 +55,7 @@ function sendToDiscord(message) {
     }
     /* A successful POST to Discord's webhook responds with a 204 NO CONTENT */
     if (res.statusCode !== 204) {
-      console.log(`Line 57\n${__dirname}`)
       console.error("Error occured during the request to the Discord webhook");
-      console.log(res)
       console.error(body)
     }
   });
