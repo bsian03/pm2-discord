@@ -25,7 +25,6 @@ var suppressed = {
 function sendToDiscord(message) {
 
   var description = message.description;
-  console.log(description.length)
 
   // If a Discord URL is not set, we do not want to continue and nofify the user that it needs to be set
   if (!conf.discord_url) {
@@ -156,7 +155,6 @@ function createMessage(data, eventName, block, altDescription) {
       description: stripAnsi(splitLog),
       timestamp: Math.floor(Date.now() / 1000),
     });
-    console.log(splitLog.length)
   }
 }
 
